@@ -6,7 +6,6 @@ const store = (function () {
     <div class="panel">
       <p>Lorem ipsum...</p>
     </div>
-    
   };
 
   return {
