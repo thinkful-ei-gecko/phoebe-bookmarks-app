@@ -28,9 +28,10 @@ $(document).ready(function() {
   api.getItems()
     .then((items) => {
     //pbtag sort by time added
-    // let newArray = items.sort(function(a,b) {
-    //   return b-a;
-    // });
+      let newArray = items.sort(function(a,b) {
+        return b-a;
+      });
+      console.log({newArray});
       items.forEach((item) => store.addBookmark(item));
       bookmarks.render();
     })

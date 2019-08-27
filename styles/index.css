@@ -5,8 +5,34 @@
 body * {
   font-family: 'Roboto', sans-serif;
 }
+/* 
+a color set I liked: 
+https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
 
+#main-view {
+  padding: 0 10px 10px 10px;
+}
+
+h1 {
+  /* margin-left: auto;
+  margin-right: auto; */
+  text-align: center;
+}
 /* Set padding and max width for text */
+
+.panel-header {
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  font-size: 100%;
+  font-family: inherit;
+  background: none;
+  border: .5pt grey solid;
+  padding: 5px 10px 5px 10px;
+}
 
 /* For the focus: 
 - A Firefox bug makes focus outlines disappear, so you must restore them. *A MUST for keyboard users!*
@@ -18,23 +44,19 @@ a:focus, button:focus, {
   cursor: pointer;
 }
 
-*{
-  margin: 0;
-  padding: 0;
-}
-
-
-
 /*The below are all styles for the accordian. Edit later*/
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: #eee;
   color: #444;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   text-align: left;
-  border: none;
+  border: .5pt darkgray solid;
   outline: none;
   transition: 0.4s;
 }
@@ -46,8 +68,9 @@ a:focus, button:focus, {
 
 /* Style the accordion panel. Note: hidden by default */
 .panel {
-  padding: 0 18px;
+  padding: 5px;
   background-color: white;
+  outline: 1pt darkgray solid;
   display: none;
   overflow: hidden;
 }

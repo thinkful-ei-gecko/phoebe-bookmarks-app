@@ -60,6 +60,7 @@ const bookmarks = (function () {
   //pbtag
   const createAccordion = function(array) {
     console.log('`createAccordion` runs');
+    console.log({array});
     let bookmarksDisplay = array.map(item => createAccordionHtml(item.id, item.title, item.rating, item.url, item.desc));
     return bookmarksDisplay.join('');
   };
@@ -68,10 +69,12 @@ const bookmarks = (function () {
   const createAccordionHtml = function(id, title, rating, url, description) {
     console.log('`createAccordionHtml` runs');
     return `
-      <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span><span></button>
+      <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span></button>
       <div class="panel" data-bookmark-id="${id}">
-        <button id="bm-url"><a href='${url}'>Visit Site</a></button>
-        <button class="bm-delete">delete</button>
+        <div class="panel-header">
+          <button id="bm-url"><a href='${url}'>Visit Site</a></button>
+          <button class="bm-delete">delete</button>
+        </div>
         <p class="description" id="bm-description">${description}</p>
       </div>
     `;
