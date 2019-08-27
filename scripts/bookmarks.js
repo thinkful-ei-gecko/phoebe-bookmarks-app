@@ -119,9 +119,9 @@ const bookmarks = (function () {
       let formElement = $('#new-bookmark-form')[0];
       let serializedJson = form.serializeJson(formElement);
       let newItem = api.addBookmark(serializedJson);
+      store.addBookmark();
       $('#add-view').empty();
       toggleMainView();
-      render();
       //expand when added! 
     });
 
@@ -140,7 +140,8 @@ const bookmarks = (function () {
   function handleDelete() {
     $('#main-view').on('click', '.bm-delete', function() {
       console.log('delete button clicked');
-      const id = getItemIdFromElement(event.currentTarget);
+      let id = event.target.;
+      console.log(id);
       api.deleteBookmark(id);
       store.bookmarks.shift(0);
     })
