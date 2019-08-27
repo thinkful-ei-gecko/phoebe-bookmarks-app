@@ -138,12 +138,12 @@ const bookmarks = (function () {
   }
 
   function handleDelete() {
-    $('#main-view').on('click', '#bm-delete', function() {
+    $('#main-view').on('click', '.bm-delete', function() {
       console.log('delete button clicked');
-      let id = event.target.getAttribute('id');
+      let id = event.target.;
       console.log(id);
       api.deleteBookmark(id);
-      this.bookmarks.shift(0);
+      store.bookmarks.shift(0);
     })
   }
 
