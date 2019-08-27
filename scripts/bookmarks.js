@@ -6,8 +6,7 @@ const bookmarks = (function () {
   const generateError = function(message) {
     return `
       <section class="error-content">
-        <button id="cancel-error">X</button>
-        <p>${message}</p>
+        <p>Oops! ${message}. Please try again.</p>
       </section>
     `;
   };
@@ -40,7 +39,7 @@ const bookmarks = (function () {
       <form class="space-between">
         <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
         <div>
-        <label for="filter-select">Sort by:</label>
+        <label for="filter-select">Filter by:</label>
         <select id="filter-select">
           <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
           <option class="filter-option" value="5">★★★★★</option>
@@ -89,7 +88,7 @@ const bookmarks = (function () {
   const createAccordion = function(array) {
     console.log('`createAccordion` runs');
     console.log({array});
-    let bookmarksDisplay = array.map(item => createAccordionHtml(item.id, item.title, item.rating, item.url, item.desc));
+    let bookmarksDisplay = array.map(item => createAccordionHtml(item.id, item.title, substituteStars(item.rating), item.url, item.desc));
     return bookmarksDisplay.join('');
   };
 
@@ -108,6 +107,24 @@ const bookmarks = (function () {
     `;
   };
 
+  const substituteStars = function(num) {
+    if (num===5) {
+      return '★★★★★';
+    }
+    if (num===4) {
+      return '★★★★☆';
+    }
+    if (num===3) {
+      return '★★★☆☆';
+    }
+    if (num===2) {
+      return '★★☆☆☆';
+    }
+    else {
+      return '★☆☆☆☆';
+    }
+  };
+
   //functional
   const handleCreateNew = function() {
     $('#main-view').on('click', '#new-bookmark', () => {
@@ -123,6 +140,7 @@ const bookmarks = (function () {
     $('#add-view').html(`
       <form id="new-bookmark-form">
         <h2>Add New Bookmark:</h2>
+        <div id="error-container"></div>
         <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required>
         <fieldset>
           <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required>
