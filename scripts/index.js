@@ -9,11 +9,13 @@
 // - remove bookmarks from list
       //- use 'delete' fetch method
 // - receive feedback when can't submit a bookmark
-      //C doesn't let you submit if not a url, title
+      //- doesn't let you submit if not a url, title
       //- prevent submit if rating isn't complete (find a way to make that part "required")
 // - minimum rating filter
 // - ONLY IF TIME: edit rating and description of bookmark in list
 // - ONLY IF TIME: all the other features on the prev. thing 
+// - Use store.adding to toggle the hide page. 
+// - find and fix all pbtags
 
 //used to start the page and call other pages
 
@@ -22,18 +24,16 @@
 
 $(document).ready(function() {
   bookmarks.bindEventListeners(),
- 
   // is there another error we need to add to the below? pbtag
   api.getItems()
     .then((items) => {
-      //pbtag sort by time added
-      // let newArray = items.sort(function(a,b) {
-      //   return b-a;
-      // });
+    //pbtag sort by time added
+    // let newArray = items.sort(function(a,b) {
+    //   return b-a;
+    // });
       items.forEach((item) => store.addBookmark(item));
       bookmarks.render();
     })
     .catch(err => console.log(err.message));
-
-  console.log('test');
+  console.log('document is ready');
 })

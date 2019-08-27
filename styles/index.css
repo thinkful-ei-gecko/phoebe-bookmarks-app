@@ -12,10 +12,6 @@ body * {
 - A Firefox bug makes focus outlines disappear, so you must restore them. *A MUST for keyboard users!*
 */
 
-.hidden {
-  display: none;
-}
-
 a:focus, button:focus, {
   outline: auto 5px -webkit-focus-ring-color;
   box-shadow: 0;

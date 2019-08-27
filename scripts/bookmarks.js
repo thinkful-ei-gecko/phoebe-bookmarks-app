@@ -8,10 +8,11 @@ const bookmarks = (function () {
     console.log('`render` runs');
 
     renderMainView();
-
+   
     let bookmarks = [...store.bookmarks];
+    $('#js-bookmarks').empty();
     $('#js-bookmarks').html(createAccordion(bookmarks));
-  
+
     //pbtag need something for the filter function - sort for rating >= "filter-rating" 
   }
 
@@ -21,7 +22,7 @@ const bookmarks = (function () {
       <form id="options-section">
         <input type="button" class="top-buttons" id="new-bookmark" value="+ New">
         <span id="js-new-bookmark-span"></span>
-        <label for="filter-select" class="hidden">Sort by:</label>
+        <label for="filter-select">Sort by:</label>
         <select id="filter-select">
           <option value="" id="js-toggle-dropdown">View All</option>
           <option value="five-only">★★★★★</option>
@@ -37,6 +38,7 @@ const bookmarks = (function () {
 
   //functional!! 
   function toggleMainView () {
+    console.log('`toggleMainView` hello!');
     $('#main-view').toggle();
   }
 
@@ -57,15 +59,17 @@ const bookmarks = (function () {
 
   //pbtag
   const createAccordion = function(array) {
-    let bookmarksDisplay = array.map(item => createAccordionHtml(item.title, item.rating, item.url, item.desc));
+    console.log('`createAccordion` runs');
+    let bookmarksDisplay = array.map(item => createAccordionHtml(item.id, item.title, item.rating, item.url, item.desc));
     return bookmarksDisplay.join('');
   };
 
   //functional
-  const createAccordionHtml = function(title, rating, url, description) {
+  const createAccordionHtml = function(id, title, rating, url, description) {
+    console.log('`createAccordionHtml` runs');
     return `
       <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span><span></button>
-      <div class="panel">
+      <div class="panel" data-bookmark-id="${id}">
         <button id="bm-url"><a href='${url}'>Visit Site</a></button>
         <button class="bm-delete">delete</button>
         <p class="description" id="bm-description">${description}</p>
@@ -77,20 +81,20 @@ const bookmarks = (function () {
   function handleCreateNew() {
     $('#main-view').on('click', '#new-bookmark', event => {
       console.log('handlecreatenew ran');
+      toggleMainView();
       generateForm();
     });
   }
 
   //functional
   function generateForm() {
-    toggleMainView();
     console.log('generateForm ran');
     $('#add-view').html(`
       <form id="new-bookmark-form">
         <h2>Add New Bookmark:</h2>
-        <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required />
+        <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required>
         <fieldset>
-          <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required />
+          <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required>
           <fieldset id="new-bookmark-rating" class="rate">
             <input type="radio" id="star5" name="rating" value="5" required>
             <label for="star5">5 stars</label>
@@ -118,13 +122,15 @@ const bookmarks = (function () {
       console.log('`handleSubmit` runs');
       let formElement = $('#new-bookmark-form')[0];
       let serializedJson = form.serializeJson(formElement);
-      let newItem = api.addBookmark(serializedJson);
-      store.addBookmark();
-      $('#add-view').empty();
-      toggleMainView();
-      //expand when added! 
+      api.addBookmark(serializedJson)
+        .then((newItem) => {
+          store.addBookmark(newItem);
+          $('#add-view').empty();
+          render();
+          toggleMainView();
+          //expand when added! 
+        });
     });
-
   }
 
   //functional 
@@ -137,14 +143,27 @@ const bookmarks = (function () {
     });
   }
 
+  function getItemIdFromElement(item) {
+    return $(item)
+      .closest('.panel')
+      .data('bookmark-id');
+  }
+
   function handleDelete() {
     $('#main-view').on('click', '.bm-delete', function() {
       console.log('delete button clicked');
-      let id = event.target.;
+      let id = getItemIdFromElement(event.target);
       console.log(id);
-      api.deleteBookmark(id);
-      store.bookmarks.shift(0);
-    })
+      api.deleteBookmark(id)
+        .then(() => {
+          store.findAndDelete(id);
+          render();
+        })
+        .catch((err) => {
+          console.log(err);
+          //pbtag render error functions
+        });
+    });
   }
 
   //filter by button

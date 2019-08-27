@@ -6,20 +6,31 @@ const store = (function () {
   let adding = false;
 
   const addBookmark = function(bookmark) {
-    if (bookmark) {
-      console.log('`store.addBookmark` runs');
-      this.bookmarks.unshift(bookmark);
-    } 
-    else {
-      let obj = api.getItems()
-      let index = obj.length - 1;
-      this.bookmarks.unshift(obj[index]);
-    }
+    console.log('`store.addBookmark` runs');
+    this.bookmarks.unshift(bookmark); 
+    // else {
+    //   let arr = api.getItems();
+    //   console.log({arr});
+    //   let index = arr.length - 1;
+    //   this.bookmarks.unshift(arr[index]);
+    // }
+  };
+
+  const findandDelete = function(item) {
+    // let index = this.bookmarks.findIndex(bookmark => bookmark.id === id);
+    // console.log({index});
+    // this.bookmarks.splice(1, index);
+    //alternative: filter out item to delete: this.items = this.items.filter(item => item.id !== id);
+    let id = item.id;
+    let index = this.bookmarks.findIndex(bookmark => bookmark.id === id);
+    console.log({index});
+    this.bookmarks.splice(1, index);
   };
 
   return {
     bookmarks: [],
     adding,
-    addBookmark
+    addBookmark,
+    findandDelete
   };
 })();
