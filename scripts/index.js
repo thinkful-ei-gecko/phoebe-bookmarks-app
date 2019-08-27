@@ -1,39 +1,39 @@
-// - you need a {} set after a fat arrow
-// - pull out of a legend within same index, not a datastore. necessary for accessibility.
+// Stuff that needs to be done: 
+// - add a bookmark
+      //C need to confirm added to server
+      //C cancel button
+      //C need to add to local store
+// - see a list of bookmarks at page open
+      //C desendents successfully showing
+      //C connect to API and 'get' (i think this is correct - review slides again)
+// - remove bookmarks from list
+      //- use 'delete' fetch method
+// - receive feedback when can't submit a bookmark
+      //C doesn't let you submit if not a url, title
+      //- prevent submit if rating isn't complete (find a way to make that part "required")
+// - minimum rating filter
+// - ONLY IF TIME: edit rating and description of bookmark in list
+// - ONLY IF TIME: all the other features on the prev. thing 
 
-// global strftime, cuid
+//used to start the page and call other pages
+
+// global strftime, cuid, bookmarks
 'use strict';
 
-const index = (function () {
+$(document).ready(function() {
+  bookmarks.bindEventListeners(),
+ 
+  // is there another error we need to add to the below? pbtag
+  api.getItems()
+    .then((items) => {
+      //pbtag sort by time added
+      // let newArray = items.sort(function(a,b) {
+      //   return b-a;
+      // });
+      items.forEach((item) => store.addBookmark(item));
+      bookmarks.render();
+    })
+    .catch(err => console.log(err.message));
 
-  //edit the below later; just added to save the code
-  const addAccordianListeners = function () {
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("active");
-
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-  }
-
-  const renderHome = function() {}
-  
-  return {
-    addAccordianListeners,
-    renderHome
-  }
-})();
-
-$(index.renderHome);
+  console.log('test');
+})
