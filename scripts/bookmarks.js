@@ -142,7 +142,7 @@ const bookmarks = (function () {
       console.log('delete button clicked');
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteBookmark(id);
-      
+      store.bookmarks.shift(0);
     })
   }
 
