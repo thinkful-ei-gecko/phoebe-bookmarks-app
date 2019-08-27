@@ -1,3 +1,5 @@
+// Before submit: test again all requirements
+
 // Stuff that needs to be done: 
 // C add a bookmark
       //C need to confirm added to server
@@ -30,7 +32,7 @@ $(document).ready(function() {
   // is there another error we need to add to the below? pbtag
   api.getItems()
     .then((items) => {
-    //pbtag sort by time added
+    //Sorted and thus displayed by newest to oldest
       let newArray = items.sort(function(a,b) {
         return b-a;
       });
@@ -40,4 +42,6 @@ $(document).ready(function() {
     })
     .catch(err => console.log(err.message));
   console.log('document is ready');
-})
+});
+
+//pbtag more error checking needs to go here 

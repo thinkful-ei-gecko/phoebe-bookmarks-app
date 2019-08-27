@@ -1,19 +1,17 @@
 //Used to store, alter the store
+// eslint-disable-next-line no-unused-vars
 
 'use strict';
 
 const store = (function () {
-  let adding = false;
+  
+  const setError = function(error) {
+    this.error = error;
+  };
 
   const addBookmark = function(bookmark) {
     console.log('`store.addBookmark` runs');
-    this.bookmarks.unshift(bookmark); 
-    // else {
-    //   let arr = api.getItems();
-    //   console.log({arr});
-    //   let index = arr.length - 1;
-    //   this.bookmarks.unshift(arr[index]);
-    // }
+    this.bookmarks.unshift(bookmark);
   };
 
   const findAndDelete = function(id) {
@@ -25,7 +23,10 @@ const store = (function () {
   return {
     bookmarks: [],
     filterBy: false,
-    adding,
+    adding: false,
+    error: null,
+
+    setError,
     addBookmark,
     findAndDelete
   };

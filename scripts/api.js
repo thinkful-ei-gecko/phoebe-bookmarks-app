@@ -2,13 +2,13 @@
 
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
 const api = (function (){
   
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/phoebe';
 
-  //pbtag review the code below for understanding 
   //if there's an non-202 error, capture it and display in the data. Otherwise, return the parsed results. 
-  function  listApiFetch (...args) {
+  const listApiFetch = function(...args) {
     let error;
     return fetch(...args)
       .then(res => {
@@ -29,15 +29,15 @@ const api = (function (){
         }
         return data;
       });
-  }
+  };
 
-  function getItems () {
+  const getItems = function() {
     console.log('`getItems` runs');
-    return listApiFetch(BASE_URL + '/bookmarks')
-  }
+    return listApiFetch(BASE_URL + '/bookmarks');
+  };
 
-  function addBookmark (stringifiedObj) {
-    console.log('`api.addBookmark` runs')
+  const addBookmark = function(stringifiedObj) {
+    console.log('`api.addBookmark` runs');
     return listApiFetch(BASE_URL + '/bookmarks', {
       method: 'POST',
       headers: {
@@ -45,7 +45,7 @@ const api = (function (){
       },
       body: stringifiedObj
     });
-  }
+  };
 
   const deleteBookmark = function(id) {
     console.log('`api.deleteBookmark` runs');
@@ -61,5 +61,5 @@ const api = (function (){
     getItems,
     addBookmark, 
     deleteBookmark
-  }
+  };
 })();

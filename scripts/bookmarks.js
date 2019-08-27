@@ -3,15 +3,39 @@
 'use strict';
 
 const bookmarks = (function () {
-  //partially functional! 
-  function render() {
+  const generateError = function(message) {
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+  };
+
+  const renderError = function() {
+    if (store.error) {
+      const errorHTML = generateError(store.error);
+      $('#error-container').html(errorHTML);
+    }
+    else {
+      $('#error-container').empty();
+    }
+  };
+
+  const addErrorToStoreAndRender = function (errMessage) {
+    store.error = errMessage;
+    renderError();
+  };
+  
+  const render = function() {
     console.log('`render` runs');
+    renderError();
     renderHeaderView();
     renderBookmarks();
-  }
+  };
 
   //functional
-  function renderHeaderView() {
+  const renderHeaderView = function() {
     $('#main-view').html(`
       <form class="space-between">
         <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
@@ -29,9 +53,9 @@ const bookmarks = (function () {
       <div id="js-bookmarks">
       </div>
     `);
-  }
+  };
 
-  function renderBookmarks() {
+  const renderBookmarks = function() {
     let bookmarks = [...store.bookmarks];
 
     if (store.filter) {
@@ -39,30 +63,29 @@ const bookmarks = (function () {
     }
     $('#js-bookmarks').empty();
     $('#js-bookmarks').html(createAccordion(bookmarks));
-  }
+  };
 
   //functional!! 
-  function toggleMainView () {
+  const toggleMainView = function() {
     console.log('`toggleMainView` hello!');
     $('#main-view').toggle();
   }
 
   // Function allows you to add listeners and expand the Accordion. Need to update code (just copy/pasted).
   //pbtag... if time edit to hide old when new is clicked
-  const handleAccordion = function () {
-    $('#main-view').on('click', '.accordion', function () {
+  const handleAccordion = function() {
+    $('#main-view').on('click', '.accordion', function() {
       // document.getElementsByClassName('active').removeClass('active');
-      this.classList.toggle("active");
+      this.classList.toggle('active');
       var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
       } else {
-        panel.style.display = "block";
+        panel.style.display = 'block';
       }
     });
   }; 
 
-  //pbtag
   const createAccordion = function(array) {
     console.log('`createAccordion` runs');
     console.log({array});
@@ -86,16 +109,16 @@ const bookmarks = (function () {
   };
 
   //functional
-  function handleCreateNew() {
-    $('#main-view').on('click', '#new-bookmark', event => {
+  const handleCreateNew = function() {
+    $('#main-view').on('click', '#new-bookmark', () => {
       console.log('handlecreatenew ran');
       toggleMainView();
       generateForm();
     });
-  }
+  };
 
   //functional
-  function generateForm() {
+  const generateForm = function() {
     console.log('generateForm ran');
     $('#add-view').html(`
       <form id="new-bookmark-form">
@@ -123,11 +146,11 @@ const bookmarks = (function () {
           </div>
         </fieldset>
       </form>
-    `)
+    `);
   }
   
   //functional
-  function handleSubmit() {
+  const handleSubmit = function() {
     $('#add-view').on('click', '#submit-new', event => {
       event.preventDefault();
       console.log('`handleSubmit` runs');
@@ -139,27 +162,28 @@ const bookmarks = (function () {
           $('#add-view').empty();
           render();
           toggleMainView();
-          //expand when added! 
-        });
+          //expand when added! pbtag
+        })
+        .catch(err => addErrorToStoreAndRender(err.message));
     });
-  }
+  };
 
   //functional 
-  function handleCancel() {
+  const handleCancel = function() {
     $('#add-view').on('click', '#cancel-new', event => {
       event.preventDefault();
       $('#add-view').empty();
       toggleMainView();
     });
-  }
+  };
 
-  function getItemIdFromElement(item) {
+  const getItemIdFromElement = function(item) {
     return $(item)
       .closest('.panel')
       .data('bookmark-id');
-  }
+  };
 
-  function handleDelete() {
+  const handleDelete = function() {
     $('#main-view').on('click', '.bm-delete', function() {
       console.log(event.target.value);
       let id = getItemIdFromElement(event.target);
@@ -168,22 +192,20 @@ const bookmarks = (function () {
           store.findAndDelete(id);
           render();
         })
-        .catch((err) => {
-          //pbtag render error functions
-        });
+        .catch(err => addErrorToStoreAndRender(err.message));
     });
-  }
+  };
 
-  function setDisplayFilter(filterValue) {
+  const setDisplayFilter = function(filterValue) {
     console.log('`setDisplayFilter` runs');
     store.bookmarks.forEach(bookmark => {
       (bookmark.rating >= filterValue) ? bookmark.display = true : bookmark.display = false;
     });
     //run function to hide all display:false 
-  }
+  };
 
   //filter by button
-  function handleFilterBy() {
+  const handleFilterBy = function() {
     $('#main-view').on('change', '#filter-select', function() {
       console.log(`filter selected: ${event.target.value}`);
       let filterValue = event.target.value;
@@ -196,9 +218,9 @@ const bookmarks = (function () {
       }
       renderBookmarks();
     });
-  }
+  };
 
-  function bindEventListeners () {
+  const bindEventListeners = function() {
     //list listeners here 
     handleAccordion();
     handleCreateNew();
@@ -206,7 +228,7 @@ const bookmarks = (function () {
     handleCancel();
     handleDelete();
     handleFilterBy();
-  }
+  };
 
   return {
     render, 
@@ -215,4 +237,4 @@ const bookmarks = (function () {
     generateForm,
   };
 
-})();
+}());
