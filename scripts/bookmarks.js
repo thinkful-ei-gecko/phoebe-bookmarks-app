@@ -36,17 +36,17 @@ const bookmarks = (function () {
   //functional
   const renderHeaderView = function() {
     $('#main-view').html(`
-      <form class="space-between">
+      <form id="header-options">
         <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
         <div>
-        <label for="filter-select">Filter by:</label>
-        <select id="filter-select">
-          <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
-          <option class="filter-option" value="5">★★★★★</option>
-          <option class="filter-option" value="4">★★★★</option>
-          <option class="filter-option" value="3">★★★</option>
-          <option class="filter-option" value="2">★★</option>
-        </select>
+          <label for="filter-select">Filter by:</label>
+          <select id="filter-select">
+            <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
+            <option class="filter-option" value="5">★★★★★</option>
+            <option class="filter-option" value="4">★★★★☆</option>
+            <option class="filter-option" value="3">★★★☆☆</option>
+            <option class="filter-option" value="2">★★☆☆☆</option>
+          </select>
         </div>
       </form>
       <div id="js-bookmarks">
@@ -74,8 +74,8 @@ const bookmarks = (function () {
   //pbtag... if time edit to hide old when new is clicked
   const handleAccordion = function() {
     $('#main-view').on('click', '.accordion', function() {
-      // document.getElementsByClassName('active').removeClass('active');
       this.classList.toggle('active');
+
       var panel = this.nextElementSibling;
       if (panel.style.display === 'block') {
         panel.style.display = 'none';
@@ -96,15 +96,21 @@ const bookmarks = (function () {
   const createAccordionHtml = function(id, title, rating, url, description) {
     console.log('`createAccordionHtml` runs');
     return `
-      <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span></button>
-      <div class="panel" data-bookmark-id="${id}">
-        <div class="space-between">
-          <button id="bm-url"><a href='${url}'>Visit Site</a></button>
-          <button class="bm-delete">delete</button>
+      <div class="whole-bookmark">
+        <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span></button>
+        <div class="panel" data-bookmark-id="${id}">
+          <div id="panel-options">
+            <button id="bm-url"><a href='${url}'>Visit Site</a></button>
+            <button class="bm-delete">🗑</button>
+          </div>
+          <p class="description" id="bm-description">${description}</p>
         </div>
-        <p class="description" id="bm-description">${description}</p>
       </div>
     `;
+  };
+
+  const cssFloatSelectedBookmark = function(element) {
+    $(element).toggle('#float');
   };
 
   const substituteStars = function(num) {
@@ -158,7 +164,7 @@ const bookmarks = (function () {
           </fieldset>
           <textarea id="new-bookmark-description" name="desc" placeholder="Enter description here (optional)"></textarea>
           <input class="hidden" name="display" value="true">
-          <div class="space-around">
+          <div class="new-bookmark-options">
             <button type="button" id="cancel-new">Cancel</button>
             <button type="submit" id="submit-new">Create</button>
           </div>
