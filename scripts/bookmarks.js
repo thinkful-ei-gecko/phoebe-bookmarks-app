@@ -6,34 +6,39 @@ const bookmarks = (function () {
   //partially functional! 
   function render() {
     console.log('`render` runs');
-
-    renderMainView();
-   
-    let bookmarks = [...store.bookmarks];
-    $('#js-bookmarks').empty();
-    $('#js-bookmarks').html(createAccordion(bookmarks));
-
-    //pbtag need something for the filter function - sort for rating >= "filter-rating" 
+    renderHeaderView();
+    renderBookmarks();
   }
 
   //functional
-  function renderMainView() {
+  function renderHeaderView() {
     $('#main-view').html(`
-      <form id="options-section">
-        <input type="button" class="top-buttons" id="new-bookmark" value="+ New">
-        <span id="js-new-bookmark-span"></span>
+      <form class="space-between">
+        <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
+        <div>
         <label for="filter-select">Sort by:</label>
         <select id="filter-select">
-          <option value="" id="js-toggle-dropdown">View All</option>
-          <option value="five-only">★★★★★</option>
-          <option value="four-and-above">★★★★</option>
-          <option value="three-and-above">★★★</option>
-          <option value="two-and-above">★★</option>
+          <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
+          <option class="filter-option" value="5">★★★★★</option>
+          <option class="filter-option" value="4">★★★★</option>
+          <option class="filter-option" value="3">★★★</option>
+          <option class="filter-option" value="2">★★</option>
         </select>
+        </div>
       </form>
       <div id="js-bookmarks">
       </div>
     `);
+  }
+
+  function renderBookmarks() {
+    let bookmarks = [...store.bookmarks];
+
+    if (store.filter) {
+      bookmarks = bookmarks.filter(bookmark => bookmark.display === true);
+    }
+    $('#js-bookmarks').empty();
+    $('#js-bookmarks').html(createAccordion(bookmarks));
   }
 
   //functional!! 
@@ -71,7 +76,7 @@ const bookmarks = (function () {
     return `
       <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span></button>
       <div class="panel" data-bookmark-id="${id}">
-        <div class="panel-header">
+        <div class="space-between">
           <button id="bm-url"><a href='${url}'>Visit Site</a></button>
           <button class="bm-delete">delete</button>
         </div>
@@ -111,8 +116,11 @@ const bookmarks = (function () {
             <label for="star1">1 star</label>
           </fieldset>
           <textarea id="new-bookmark-description" name="desc" placeholder="Enter description here (optional)"></textarea>
-          <button type="button" id="cancel-new">Cancel</button>
-          <button type="submit" id="submit-new">Create</button>
+          <input class="hidden" name="display" value="true">
+          <div class="space-around">
+            <button type="button" id="cancel-new">Cancel</button>
+            <button type="submit" id="submit-new">Create</button>
+          </div>
         </fieldset>
       </form>
     `)
@@ -140,7 +148,6 @@ const bookmarks = (function () {
   function handleCancel() {
     $('#add-view').on('click', '#cancel-new', event => {
       event.preventDefault();
-      console.log('cancel button was clicked');
       $('#add-view').empty();
       toggleMainView();
     });
@@ -154,23 +161,42 @@ const bookmarks = (function () {
 
   function handleDelete() {
     $('#main-view').on('click', '.bm-delete', function() {
-      console.log('delete button clicked');
+      console.log(event.target.value);
       let id = getItemIdFromElement(event.target);
-      console.log(id);
       api.deleteBookmark(id)
         .then(() => {
           store.findAndDelete(id);
           render();
         })
         .catch((err) => {
-          console.log(err);
           //pbtag render error functions
         });
     });
   }
 
+  function setDisplayFilter(filterValue) {
+    console.log('`setDisplayFilter` runs');
+    store.bookmarks.forEach(bookmark => {
+      (bookmark.rating >= filterValue) ? bookmark.display = true : bookmark.display = false;
+    });
+    //run function to hide all display:false 
+  }
+
   //filter by button
-  // function handleFilterBy() {}
+  function handleFilterBy() {
+    $('#main-view').on('change', '#filter-select', function() {
+      console.log(`filter selected: ${event.target.value}`);
+      let filterValue = event.target.value;
+      if (filterValue === '1') {
+        store.filter = false;
+      }
+      else {
+        store.filter = true;
+        setDisplayFilter(filterValue);
+      }
+      renderBookmarks();
+    });
+  }
 
   function bindEventListeners () {
     //list listeners here 
@@ -179,7 +205,7 @@ const bookmarks = (function () {
     handleSubmit();
     handleCancel();
     handleDelete();
-    // handleFilterBy();
+    handleFilterBy();
   }
 
   return {

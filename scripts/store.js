@@ -16,16 +16,15 @@ const store = (function () {
     // }
   };
 
-  const findAndDelete = function(item) {
+  const findAndDelete = function(id) {
     //alternative: filter out item to delete: this.items = this.items.filter(item => item.id !== id);
-    let id = item.id;
     let index = this.bookmarks.findIndex(bookmark => bookmark.id === id);
-    console.log({index});
-    this.bookmarks.splice(1, index);
+    this.bookmarks.splice(index, 1);
   };
 
   return {
     bookmarks: [],
+    filterBy: false,
     adding,
     addBookmark,
     findAndDelete
