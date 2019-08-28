@@ -7,9 +7,10 @@ body * {
 }
 
 body {
-  background: #e99b9194 url("https://imgur.com/7DoXp4U.jpg");
-  background-repeat: repeat;
-  padding: 0 15px 10px 15px;
+  height: 100%;
+  padding: 0;
+  background: #e99b9194 url("https://imgur.com/7DoXp4U.jpg") repeat 0 0;
+  display: block;
 }
 
 /* 
@@ -22,11 +23,11 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
 
 #new-bookmark-form {
   padding: 0;
-  background: #e99b917e;
+  height: 100%;
 }
 
 #add-view {
-  width: 270px;
+  width: 290px;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -64,7 +65,7 @@ h1 {
 .new-bookmark-options {
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 10px 0 20px 0;
 }
 
 #header-options {
@@ -100,40 +101,50 @@ h1 {
 #page-title {
   margin-bottom: 0;
   line-height: 90%;
+  font-size: 25pt;
+  background-color: #e99b917e;
 }
 
 #new-bookmark-url {
-  width: 270px;
+  width: 100%;
   border: none;
   margin-bottom: 10px;
   height: 35px;
-  padding: 2px 2px 2px 10px;;
-  border: 1pt solid black;
+  padding: 2px 2px 2px 15px;
+  border: 2pt solid black;
+  border-radius: 5em;
 }
 
 #first-fieldset {
-  width: 270px;
+  min-width: 100%;
   margin: 0;
   padding: 0;
-  border: 1pt black solid;
-  display: flex;
-  justify-content: center;
+  border: 2pt black solid;
+  border-radius: 1rem 1rem 3rem 3rem;
+  background: #e99b917e;
 }
 
 #new-bookmark-title {
   width: 100%;
   border: none;
-  border-bottom: 1pt black solid;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 1.5pt black solid;
   height: 35px;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 15px;
 }
 
 #new-bookmark-description {
   width: 93%;
-  min-height: 210px;
+  min-height: 180px;
   margin: 0 10px;
+  padding: 5px;
   font-size: 90%;
-  border: 1pt black solid;
+  border: 1.5pt black solid;
+  border-radius: 0.2rem;
+}
+
+#cancel-new, #submit-new {
+  font-size: 120%;
 }
 
 #filter-select, #new-bookmark, #bm-url, #cancel-new, #submit-new {
@@ -234,25 +245,25 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
   white-space:nowrap;
   cursor:pointer;
   font-size:30px;
-  color:#ccc;
+  color: darkgray;
 }
 .rate:not(:checked) > label:before {
   content: '★ ';
 }
 
 .rate > input:checked ~ label {
-  color: #efba7e;    
+  color: #2a1b6a;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: #FCC875;  
+  color: #f4f1ff;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-  color: #d89f62;
+  color: #090422;
 }
 
 #new-bookmark-rating {
