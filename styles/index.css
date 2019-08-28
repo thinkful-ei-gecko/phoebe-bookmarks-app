@@ -7,7 +7,7 @@ body * {
 }
 
 body {
-  /* background: #e99b91; */
+  background: #e99b9194;
   padding: 0 15px 10px 15px;
 }
 
@@ -21,6 +21,7 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
 
 #new-bookmark-form {
   padding: 0;
+  background: #e99b917e;
 }
 
 #add-view {
@@ -38,8 +39,6 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
   line-height: 90%;
   padding: 0;
   margin: 0;
-  /* for a neon effect */
-  /* text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF; */
 }
 
 h2 {
@@ -49,11 +48,12 @@ h2 {
 h1 {
   /* margin-left: auto;
   margin-right: auto; */
-  text-align: center;
+  color: #2a1b6a;
   font-family: 'Fontdiner Swanky', cursive;
   font-size: 2.2rem;
   line-height: 87%;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 #js-bookmarks {
@@ -141,6 +141,7 @@ h1 {
 }
 
 #filter-select, #new-bookmark {
+  background: #FCC875;
   font-family: 'Fontdiner Swanky', cursive;
   font-size: 150%
 }
@@ -148,6 +149,7 @@ h1 {
 #bm-url, #cancel-new, #submit-new {
   font-family: 'Sacramento', cursive;
   font-weight: 600;
+  background: rgba(252, 200, 117, 0.616);
 }
 
 #bm-url {
@@ -192,7 +194,7 @@ a:focus, button:focus {
   padding: 10px 15px 10px 15px;
   width: 100%;
   text-align: left;
-  border: 1this.classList.toggle('active');pt darkgray solid;
+  /* border: 1this.classList.toggle('active');pt darkgray solid; */
   outline: none;
   transition: 0.4s;
 }
@@ -209,8 +211,8 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 /* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 10px;
-  background-color: white;
-  outline: 1pt darkgray solid;
+  background-color: rgb(245, 245, 245);
+  outline: 1pt #CBC7CB solid;
   display: none;
   overflow: hidden;
 }
@@ -236,19 +238,20 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 .rate:not(:checked) > label:before {
   content: '★ ';
 }
+
 .rate > input:checked ~ label {
-  color: #ffc700;    
+  color: #efba7e;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: #deb217;  
+  color: #FCC875;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-  color: #c59b08;
+  color: #d89f62;
 }
 
 #new-bookmark-rating {
