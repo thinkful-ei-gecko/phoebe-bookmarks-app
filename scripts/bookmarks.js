@@ -39,7 +39,7 @@ const bookmarks = (function () {
       <form id="header-options">
         <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
         <div>
-          <label for="filter-select">Filter by:</label>
+          <label for="filter-select" id="filter-select-label">Filter by:</label>
           <select id="filter-select">
             <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
             <option class="filter-option" value="5">★★★★★</option>
@@ -145,10 +145,10 @@ const bookmarks = (function () {
     console.log('generateForm ran');
     $('#add-view').html(`
       <form id="new-bookmark-form">
-        <h2>Add New Bookmark:</h2>
+        <h2 id="page-title">Add New Bookmark:</h2>
         <div id="error-container"></div>
         <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required>
-        <fieldset>
+        <fieldset id="first-fieldset">
           <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required>
           <fieldset id="new-bookmark-rating" class="rate">
             <input type="radio" id="star5" name="rating" value="5" required>

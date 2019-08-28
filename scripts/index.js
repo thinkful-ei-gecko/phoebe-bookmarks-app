@@ -21,6 +21,7 @@
 // - Use store.adding to toggle the hide page.
 // - make sure that every time render runs it is placing the bookmarks in the correct order
 // mockflow: https://wireframepro.mockflow.com/editor.jsp?editor=off&perm=Owner&projectid=M0dc674d4151aad4bbcb5dd3cb93841cf1566693933014&publicid=e38c24fe142a438e9de76e49bd5f9b84#/page/D03c154e8e07a840496c2d6f6fa411812/sidebar/off
+// - max lines of desctipion??? 
 
 //used to start the page and call other pages
 
