@@ -231,7 +231,7 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 /* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 10px;
-  background-color: rgb(245, 245, 245);
+  background-color: white;
   border-left: 1pt #e99b9194 solid;
   border-left: 1pt #e99b9194 solid;
   display: none;
