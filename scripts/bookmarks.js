@@ -38,7 +38,7 @@ const bookmarks = (function () {
     $('#main-view').html(`
       <form id="header-options">
         <input class="top-buttons" id="new-bookmark" value="+ New" type="button">
-        <div>
+        <div class="view-all">
           <label for="filter-select" id="filter-select-label">Filter by:</label>
           <select id="filter-select">
             <option class="filter-option" value="1" id="js-toggle-dropdown">View All</option>
@@ -66,9 +66,8 @@ const bookmarks = (function () {
 
   //functional!! 
   const toggleMainView = function() {
-    console.log('`toggleMainView` hello!');
     $('#main-view').toggle();
-  }
+  };
 
   // Function allows you to add listeners and expand the Accordion. Need to update code (just copy/pasted).
   //pbtag... if time edit to hide old when new is clicked
@@ -86,15 +85,12 @@ const bookmarks = (function () {
   }; 
 
   const createAccordion = function(array) {
-    console.log('`createAccordion` runs');
-    console.log({array});
     let bookmarksDisplay = array.map(item => createAccordionHtml(item.id, item.title, substituteStars(item.rating), item.url, item.desc));
     return bookmarksDisplay.join('');
   };
 
   //functional
   const createAccordionHtml = function(id, title, rating, url, description) {
-    console.log('`createAccordionHtml` runs');
     return `
       <div class="whole-bookmark">
         <button class="accordion"><span class="bm-title">${title}</span><span class="bm-rating">${rating}</span></button>
@@ -134,7 +130,6 @@ const bookmarks = (function () {
   //functional
   const handleCreateNew = function() {
     $('#main-view').on('click', '#new-bookmark', () => {
-      console.log('handlecreatenew ran');
       toggleMainView();
       generateForm();
     });
@@ -142,7 +137,6 @@ const bookmarks = (function () {
 
   //functional
   const generateForm = function() {
-    console.log('generateForm ran');
     $('#add-view').html(`
       <form id="new-bookmark-form">
         <h2 id="page-title">Add New Bookmark:</h2>
@@ -150,6 +144,7 @@ const bookmarks = (function () {
         <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required>
         <fieldset id="first-fieldset">
           <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required>
+          <div class="centering-div"></div>
           <fieldset id="new-bookmark-rating" class="rate">
             <input type="radio" id="star5" name="rating" value="5" required>
             <label for="star5">5 stars</label>
@@ -162,6 +157,7 @@ const bookmarks = (function () {
             <input type="radio" id="star1" name="rating" value="1">
             <label for="star1">1 star</label>
           </fieldset>
+          <div class="centering-div"></div>
           <textarea id="new-bookmark-description" name="desc" placeholder="Enter description here (optional)"></textarea>
           <input class="hidden" name="display" value="true">
           <div class="new-bookmark-options">
@@ -177,7 +173,6 @@ const bookmarks = (function () {
   const handleSubmit = function() {
     $('#add-view').on('click', '#submit-new', event => {
       event.preventDefault();
-      console.log('`handleSubmit` runs');
       let formElement = $('#new-bookmark-form')[0];
       let serializedJson = form.serializeJson(formElement);
       api.addBookmark(serializedJson)
@@ -209,7 +204,6 @@ const bookmarks = (function () {
 
   const handleDelete = function() {
     $('#main-view').on('click', '.bm-delete', function() {
-      console.log(event.target.value);
       let id = getItemIdFromElement(event.target);
       api.deleteBookmark(id)
         .then(() => {
@@ -243,6 +237,14 @@ const bookmarks = (function () {
       renderBookmarks();
     });
   };
+
+  // const accordionStyles = function () {
+  //   //if index 0 add class top-accordion
+  //   //if index [length-1] add class bottom-accordian
+  //   reset classes 
+  //   call somewhere
+    
+  // }
 
   const bindEventListeners = function() {
     //list listeners here 

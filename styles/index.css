@@ -13,12 +13,9 @@ body {
   display: block;
 }
 
-/* 
-a color set I liked: 
-https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
-
 #main-view {
   margin-top: 5px;
+  padding: 0 13px 13px 13px;
 }
 
 #new-bookmark-form {
@@ -27,7 +24,7 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
 }
 
 #add-view {
-  width: 290px;
+  width: 90%;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -37,6 +34,7 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
 #subtitle {
   font-size: 1.6rem;
   font-style: italic;
+  color: rgb(37, 37, 37);
   text-align: center;
   line-height: 90%;
   padding: 0;
@@ -59,7 +57,7 @@ h1 {
 }
 
 #js-bookmarks {
-  margin: 20px 0px 15px 0px;
+  margin: 15px 0px 15px 0px;
 }
 
 .new-bookmark-options {
@@ -70,12 +68,17 @@ h1 {
 
 #header-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin: 10px;
+}
+
+.view-all {
+  width: 170px;
 }
 
 #panel-options  {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 #new-bookmark, button, select {
@@ -83,7 +86,6 @@ h1 {
   font-family: inherit;
   background: none;
   border: .5pt grey solid;
-  padding: 5px 10px 5px 10px;
 }
 
 #filter-select-label {
@@ -103,6 +105,7 @@ h1 {
   line-height: 90%;
   font-size: 25pt;
   background-color: #e99b917e;
+  border-radius: 0.5rem 0;
 }
 
 #new-bookmark-url {
@@ -144,10 +147,13 @@ h1 {
 }
 
 #cancel-new, #submit-new {
-  font-size: 120%;
+  font-size: 140%;
+  padding: 5px 20px;
+  border: 1.5pt black solid;
+  border-radius: 50%;
 }
 
-#filter-select, #new-bookmark, #bm-url, #cancel-new, #submit-new {
+#filter-select, #new-bookmark, #bm-url {
   box-shadow: 5px 5px black;
   border-radius: 50%;
 }
@@ -155,7 +161,7 @@ h1 {
 #filter-select, #new-bookmark {
   background: #FCC875;
   font-family: 'Fontdiner Swanky', cursive;
-  font-size: 150%
+  font-size: 150%;
 }
 
 #bm-url, #cancel-new, #submit-new {
@@ -165,7 +171,9 @@ h1 {
 }
 
 #bm-url {
+  height: 30px;
   width: 60%;
+  padding: 5px, 10px, 0px, 5px;
   font-size: 16pt;
 }
 
@@ -224,7 +232,8 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 .panel {
   padding: 10px;
   background-color: rgb(245, 245, 245);
-  outline: 1pt #CBC7CB solid;
+  border-left: 1pt #e99b9194 solid;
+  border-left: 1pt #e99b9194 solid;
   display: none;
   overflow: hidden;
 }
@@ -245,7 +254,7 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
   white-space:nowrap;
   cursor:pointer;
   font-size:30px;
-  color: darkgray;
+  color: white;
 }
 .rate:not(:checked) > label:before {
   content: '★ ';
@@ -256,7 +265,7 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: #f4f1ff;  
+  color: #FCC875;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
@@ -267,74 +276,110 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 }
 
 #new-bookmark-rating {
+  margin-left: 58px;
+  margin-right: 58px;
   width: 172px;
-  margin: 0 47px 0 47px;
-  text-align: center;
   border: none;
 }
 
-/* @media screen and (min-width: 350px) {
-  body {
-    max-width: 350px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media screen and (min-width: 420px) {
-  body {
-    max-width: 800px;
-  }
-
-  #main-view {
-    margin: 40px;
-  }
-
-  #filter-select, #new-bookmark {
-    font-size: 100%;
-  }
-
+@media screen and (min-width: 350px) {
   #header-options {
     justify-content: space-between;
   }
 
-  .accordion {
-    font-size: 80%;
-    padding: 5px 10px;
-    height: 30px;
+  #new-bookmark-rating {
+    margin-left: 82px;
+    margin-right: 82px;
   }
+}
 
-  #panel.options {
-    justify-content: space-between;
-  }
-
-  #bm-url {
-    width: 100%;
-    height: 80%;
-    padding: 0;
-  }
-
-  #add-view {
-    width: 500px;
-  }
-
-  #first-fieldset {
-    width: 100%;
-  }  
-
+@media screen and (min-width: 425px) {
   #page-title {
     padding: 0 0 0 10px;
-  }
-
-  #new-bookmark-url {
-    width: 100%;
+    font-size: 27pt;
   }
 
   #new-bookmark-rating {
+    margin-left: 105px;
+    margin-right: 105px;
+  }
+
+  #header-options {
+    height: 50px;
+    justify-content: space-between;
+  }
+
+  #new-bookmark {
+    height: 50px;
+    font-size: 150%;
+  }
+
+  .view-all {
+    width: 238px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    max-width: 765px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  #bm-url, #cancel-new, #submit-new {}
+  #view-all {
+    font-size: 130%;
+  }
 
-} */
+  #new-bookmark-rating {
+    height: 45px;
+    margin-top: 3px;
+    margin-left: 258px;
+    margin-right: 258px;
+  }
+
+  #new-bookmark-description {
+    width: 97%;
+  }
+
+  #panel-options {
+    justify-content: space-between
+  }
+}
+
+@media screen and (min-width: 1024px) {  
+  #header-options {
+    height: 34px;
+    margin-top: 50px;
+  }
+  
+  #filter-select-label {
+    margin-right: 10px;
+    line-height: 90%;
+    font-family: 'Sacramento', cursive;
+    font-size: 160%;
+    font-style: italic;
+    font-weight: 550;
+    opacity: 100;
+  }
+
+  #filter-select {
+    font-size: 100%;
+  }
+
+  #new-bookmark {
+    font-size: 100%;
+    height: 30px;
+  }  
+
+  .view-all {
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  #header-options {
+    margin-bottom: -5px;
+  }
+}
