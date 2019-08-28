@@ -19,9 +19,16 @@ https://coolors.co/3c3744-090c9b-3066be-b4c5e4-fbfff1 */
   margin-top: 5px;
 }
 
+#new-bookmark-form {
+  padding: 0;
+}
+
 #add-view {
+  width: 270px;
   margin-top: 30px;
-  padding: 0 10px 10px 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 #subtitle {
@@ -56,12 +63,12 @@ h1 {
 .new-bookmark-options {
   display: flex;
   justify-content: space-around;
-  padding: 10px 0 0 0;
+  padding: 10px 0;
 }
 
 #header-options {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 #panel-options  {
@@ -94,13 +101,8 @@ h1 {
   line-height: 90%;
 }
 
-/* #new-bookmark-url, #new-bookmark-title, #new-bookmark-description {
-  width: 100%;
-  border: none;
-}  */
-
 #new-bookmark-url {
-  width: 100%;
+  width: 270px;
   border: none;
   margin-bottom: 10px;
   height: 35px;
@@ -111,8 +113,10 @@ h1 {
 #first-fieldset {
   width: 270px;
   margin: 0;
-  padding: 0 0 20px 0;
+  padding: 0;
   border: 1pt black solid;
+  display: flex;
+  justify-content: center;
 }
 
 #new-bookmark-title {
@@ -125,9 +129,8 @@ h1 {
 
 #new-bookmark-description {
   width: 93%;
-  min-height: 275px;
+  min-height: 210px;
   margin: 0 10px;
-  padding: 7px;
   font-size: 90%;
   border: 1pt black solid;
 }
@@ -144,12 +147,12 @@ h1 {
 
 #bm-url, #cancel-new, #submit-new {
   font-family: 'Sacramento', cursive;
+  font-weight: 600;
 }
 
 #bm-url {
   width: 60%;
   font-size: 16pt;
-  font-weight: 600;
 }
 
 .bm-delete {
@@ -291,8 +294,32 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
   }
 
   #bm-url {
-    width: 40%;
+    width: 100%;
     height: 80%;
     padding: 0;
   }
+
+  #add-view {
+    width: 500px;
+  }
+
+  #first-fieldset {
+    width: 100%;
+  }  
+
+  #page-title {
+    padding: 0 0 0 10px;
+  }
+
+  #new-bookmark-url {
+    width: 100%;
+  }
+
+  #new-bookmark-rating {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #bm-url, #cancel-new, #submit-new {}
+
 }

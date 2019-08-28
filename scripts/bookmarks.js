@@ -149,6 +149,7 @@ const bookmarks = (function () {
         <div id="error-container"></div>
         <input type="url" id="new-bookmark-url" name="url" placeholder="Enter link here" required>
         <fieldset id="first-fieldset">
+          <label for=""
           <input type="text" id="new-bookmark-title" name="title" value="" placeholder="Bookmark Title" required>
           <fieldset id="new-bookmark-rating" class="rate">
             <input type="radio" id="star5" name="rating" value="5" required>
