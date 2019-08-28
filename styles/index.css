@@ -7,7 +7,8 @@ body * {
 }
 
 body {
-  background: #e99b9194;
+  background: #e99b9194 url("https://imgur.com/7DoXp4U.jpg");
+  background-repeat: repeat;
   padding: 0 15px 10px 15px;
 }
 
@@ -261,7 +262,7 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
   border: none;
 }
 
-@media screen and (min-width: 350px) {
+/* @media screen and (min-width: 350px) {
   body {
     max-width: 350px;
     margin-left: auto;
@@ -325,4 +326,4 @@ button:hover,#new-bookmark:hover,#filter-select:hover {
 
   #bm-url, #cancel-new, #submit-new {}
 
-}
+} */
