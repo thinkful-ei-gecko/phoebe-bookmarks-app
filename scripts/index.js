@@ -42,7 +42,6 @@ $(document).ready(function() {
       bookmarks.render();
     })
     .catch(err => console.log(err.message));
-  console.log('document is ready');
 });
 
 //pbtag more error checking needs to go here 

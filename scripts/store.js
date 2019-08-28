@@ -10,7 +10,6 @@ const store = (function () {
   };
 
   const addBookmark = function(bookmark) {
-    console.log('`store.addBookmark` runs');
     this.bookmarks.unshift(bookmark);
   };
 

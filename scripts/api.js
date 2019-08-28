@@ -32,12 +32,10 @@ const api = (function (){
   };
 
   const getItems = function() {
-    console.log('`getItems` runs');
     return listApiFetch(BASE_URL + '/bookmarks');
   };
 
   const addBookmark = function(stringifiedObj) {
-    console.log('`api.addBookmark` runs');
     return listApiFetch(BASE_URL + '/bookmarks', {
       method: 'POST',
       headers: {
@@ -48,7 +46,6 @@ const api = (function (){
   };
 
   const deleteBookmark = function(id) {
-    console.log('`api.deleteBookmark` runs');
     return listApiFetch(BASE_URL + '/bookmarks' + `/${id}`, {
       method: 'DELETE',
       headers: {

@@ -27,7 +27,6 @@ const bookmarks = (function () {
   };
   
   const render = function() {
-    console.log('`render` runs');
     renderError();
     renderHeaderView();
     renderBookmarks();
@@ -215,7 +214,6 @@ const bookmarks = (function () {
   };
 
   const setDisplayFilter = function(filterValue) {
-    console.log('`setDisplayFilter` runs');
     store.bookmarks.forEach(bookmark => {
       (bookmark.rating >= filterValue) ? bookmark.display = true : bookmark.display = false;
     });
@@ -225,7 +223,6 @@ const bookmarks = (function () {
   //filter by button
   const handleFilterBy = function() {
     $('#main-view').on('change', '#filter-select', function() {
-      console.log(`filter selected: ${event.target.value}`);
       let filterValue = event.target.value;
       if (filterValue === '1') {
         store.filter = false;
